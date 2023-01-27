@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Django Calculator</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <style>
+      .hidden {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="seleccion" >
+          <form class="form-inline" method="post">
+            {% csrf_token %}
+            <select id="Cambio" name="Cambio">
+              <option value="">Seleccióna un tipo de cambio</option>
+              <option value="Civil2Siderio">Civil a Siderio</option>
+              <option value="Civil2Verdadero">Civil a Verdadero</option>
+              <option value="Siderio2Verdadero">Siderio a Verdadero</option>
+              <option value="Sidero2Civil">Sidero a Civil</option>
+              <option value="Verdadero2Civil">Verdadero a Civil</option>
+              <option value="Verdadero2Siderio">Verdadero a Siderio</option>
+            </select>
+            <input type="submit" name="submit" value="Submit" class="btn">
+          </form>
+
+        </div>
+      </div>
+        <div id="Civil2Siderio" class="hidden">
+          <form method="post">
+            {% csrf_token %}
+          <input value="Civil2Siderio" id="Cambio" name="Cambio" style="display: none">
+          Tiempo Civil Origen:(Horas) <input type="number" min="0" max="24" size="30" name="tiempo1" required="required">
+          <br>
+          Longitud de Origen: <input type="number" size="30" name="longT1" required="required">
+          Longitud de Destino: <input type="number" size="30" name="longT2" required="required"><br>
+          Tiempo siderio a las 0 horas TU en Greenwich:(Horas) <input type="number" min="0" max="24" size="30" name="Tsg0" required="required"><br>
+          <input type="submit" name="submit" value="Submit" class="btn">
+          </form>
+        </div>
+        <div id="Civil2Verdadero" class="hidden">
+          <form>
+          Razón Social: <input type="text" size="30" name="op1" required="required"><br>
+          Direccion: <input type="text" size="30" name="op1" required="required"><br>
+          RUC: <input type="text" size="30" name="op1"><br>
+          <input type="submit" name="submit" value="Submit" class="btn">
+          </form>
+        </div>
+        <div id="Siderio2Verdadero" class="hidden">
+          <form>
+          Subtipo: 
+          <select name="subtipo" id=""> 
+            <option value="">subtipo1</option>
+            <option value="">subtipo 2</option>
+            <option value="">subtipo 3</option> 
+          </select> <br>
+          Direccion: <input type="text" size="30" name="op1" required="required"><br>			
+          <input type="submit" name="submit" value="ENVIAR" class="btn">
+          </form>
+        </div>
+        <div id="Sidero2Civil" class="hidden">
+          <form>
+          Subtipo: 
+          <select name="subtipo" id=""> 
+            <option value="">subtipo1</option>
+            <option value="">subtipo 2</option>
+            <option value="">subtipo 3</option> 
+          </select> <br>
+          Direccion: <input type="text" size="30" name="op1" required="required"><br>			
+          <input type="submit" name="submit" value="ENVIAR" class="btn">
+          </form>
+        </div>
+        <div id="Verdadero2Civil" class="hidden">
+          <form>
+          Subtipo: 
+          <select name="subtipo" id=""> 
+            <option value="">subtipo1</option>
+            <option value="">subtipo 2</option>
+            <option value="">subtipo 3</option> 
+          </select> <br>
+          Direccion: <input type="text" size="30" name="op1" required="required"><br>			
+          <input type="submit" name="submit" value="ENVIAR" class="btn">
+          </form>
+        </div>
+        <div id="Verdadero2Siderio" class="hidden">
+          <form>
+            Razón Social: <input type="text" size="30" name="op1" required="required"><br>
+            Direccion: <input type="text" size="30" name="op1" required="required"><br>
+            RUC: <input type="text" size="30" name="op1"><br>
+            <input type="submit" name="submit" value="ENVIAR" class="btn">
+            </form>
+        </div>
+      </div>
+    <script>
+      document.getElementById("Cambio").addEventListener("change", function(){
+        //obtener el valor seleccionado
+        let cambioSelected = this.value;
+        // ocultar todos los elementos con la clase hidden
+        let elements = document.querySelectorAll(".hidden");
+        elements.forEach(element => element.style.display = "none");
+        //mostrar el elemento con el atributo data-color igual al valor seleccionado
+        let selectedElement = document.querySelector(`[id="${cambioSelected}"]`);
+        if(selectedElement)
+            selectedElement.style.display = "block";
+    });
+    </script>    
+    </div> 
+  </body>
+</html>
