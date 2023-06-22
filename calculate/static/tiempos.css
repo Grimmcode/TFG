@@ -1,0 +1,185 @@
+
+.container{
+    display: flex;
+    flex-direction: column;
+    gap: 100px ;
+    
+}
+.seleccion{
+  border: 1px solid var(--select-border);
+  border-radius: 0.25em;
+}
+.form{
+  align-self: center;
+  
+  
+}
+.hidden {
+  background-color: rgba(164, 217, 248, 0.315) ;
+  border: 1px solid #7c5ffa;
+  display: none;
+  align-self: center;
+  border-radius:3px;
+  width: 30%;
+  
+}
+form input[type="text"],
+form input[type="number"]{
+	width:180px;
+	padding:3px 10px;
+	border:1px solid #f6f6f6;
+	border-radius:3px;
+	background-color:#f6f6f6;
+	margin:8px 0;
+	display:inline-block;
+}
+form input[type="submit"]{
+	width:100%;
+	padding:8px 16px;
+	margin-top:32px;
+	border:1px solid #000;
+	border-radius:5px;
+	display:block;
+	color:#fff;
+	background-color:#000;
+} 
+form input[type="submit"]:hover{
+	cursor:pointer;
+}
+.cambio{  
+   /* A reset of styles, including removing the default dropdown arrow*/
+  appearance: none;
+  /* Additional resets for further consistency*/
+  background-color: rgba(110, 110, 110, 0.315) ;
+  border: 1px solid var(--select-border);
+  border-radius: 0.25em;
+  padding: 0 1em 0 0;
+  margin: 0;
+  width: 100%;
+  height: 5em;
+  font-family: inherit;
+  font-size: inherit;
+  cursor: grab;
+  line-height: inherit;
+  outline: none;
+}
+.cambio select{
+  color: #aa0707;
+}
+
+
+.calculos{
+  /* A reset of styles, including removing the default dropdown arrow*/
+  appearance: none;
+  /* Additional resets for further consistency*/
+  background-color: rgba(255, 255, 255, 0) ;
+  border: 1px solid var(--select-border);
+  width: 7%;
+  font-family: inherit;
+  font-size: inherit;
+  cursor: inherit;
+  line-height: inherit;
+  outline: none;
+  color: #000000;
+}
+.calculos:hover {
+  width: 300px;
+  transition: width 0.3s ease-in-out;
+}
+.calculos:-ms-expand{
+  background-color: rgba(29, 122, 11, 0) ;
+
+
+}
+select::-ms-expand {
+  display: none;
+}
+/* Estilos generales */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+/* Encabezado */
+header {
+  display: flex;
+  color: #f7f7f7;
+  padding: 20px;
+  background: linear-gradient(to right, #3eac20, #2e661a);
+
+}
+footer{
+  background: linear-gradient(to right, #3eac20, #2e661a);
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  color: #000000;
+  text-align: center;
+}
+h1 {
+  margin: 0;
+}
+
+nav ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+nav li {
+  display: inline;
+  margin-right: 10px;
+}
+
+nav a {
+  color: #000000;
+  text-decoration: none;
+}
+
+/* Banner */
+.banner img {
+  display: block;
+  width: 5rem;
+  flex-grow: 1;
+  border-radius: 25em;
+}
+.informacion{
+  flex-grow: 2;
+}
+/* Búsqueda */
+.search {
+  padding: 20px;
+}
+
+.search input[type="text"] {
+  padding: 10px;
+  width: 300px;
+}
+
+.search button {
+  padding: 10px 20px;
+  background-color: #333;
+  color: #000000;
+  border: none;
+  cursor: pointer;
+}
+
+/* Introducción */
+.intro {
+  padding: 20px;
+}
+
+h2 {
+  margin-top: 0;
+}
+
+.cta-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #333;
+  color: #000000;
+  text-decoration: none;
+  margin-top: 10rem;
+}
+
