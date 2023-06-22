@@ -230,6 +230,16 @@ def transformacionCoordenadas(request):
         lons=request.POST.get("lons")
         tipo=request.POST.get("tipo")
         h=request.POST.get("altura")
+        #coordenadas origen local
+        lonor=request.POST.get("lonor")
+        lator=request.POST.get("lator")
+        hor=request.POST.get("hor")
+        latgor=request.POST.get("latg")
+        latmor=request.POST.get("latm")
+        latsor=request.POST.get("lats")
+        longor=request.POST.get("long")
+        lonmor=request.POST.get("lonm")
+        lonsor=request.POST.get("lons")
         elipsoide=elipsoides.get(elipsoide)
         #calculamos constantes del elipsoide 
         f=(1/elipsoide["invf"])
@@ -251,8 +261,7 @@ def transformacionCoordenadas(request):
             cartX=(n+h)*math.cos(lat)*math.cos(lon)
             cartY=(n+h)*math.cos(lat)*math.sin(lon)
             cartZ=(n*(1-e2)+h)*math.sin(lat)
-            return render()  
-        
+            return render()   
         if transformacion=="car2geo":
             cor1=1
             cor2=1
@@ -279,8 +288,42 @@ def transformacionCoordenadas(request):
             latt=latt*(180/math.pi)
             lonn=lonn*(180/math.pi)
             Hf=H
-        return render()    
+            return render()    
+        if transformacion=="car2enu":
+            X=lat
+            Y=lon
+            Z=h
+            if tipo=="gms":
+                if longor<0:
+                    lonmor=lonmor*-1
+                    lonsor=lonsor*-1
+                lator=(latgor+latmor/60+latsor/3600)*(math.pi/180)
+                lonor=(longor+lonmor/60+lonsor/3600)*(math.pi/180)
+            if tipo!="gms":
+                lator=lator*(math.pi/180)
+                lonor=lonor*(math.pi/180)  
+            #radio de curvatura maximo
+            n=elipsoide["a"]/(1-e2*math.sin(lator)**2)**(1/2)
+            #coordenadas Cartesianas
+            Xo=(n+hor)*math.cos(lator)*math.cos(lonor)
+            Yo=(n+hor)*math.cos(lator)*math.sin(lonor)
+            Zo=(n*(1-e2)+hor)*math.sin(lator)
+            
+            IncX=X-Xo
+            IncY=Y-Yo
+            IncZ=Z-Zo
     
+            e=-math.sin(lonor)*IncX+math.cos(lonor)*IncY
+            n=-math.sin(lator)*math.cos(lonor)*IncX-math.sin(lator)*math.sin(lonor)*IncY+math.cos(lator)*IncZ
+            u=math.cos(lator)*math.cos(lonor)*IncX+math.cos(lator)*math.sin(lonor)*IncY+math.sin(lator)*IncZ
+            
+        return render()
+            
+            
+            
+            
+            
+            
 def home(request):
     if request.method == "POST":
         a = request.POST.get('first')

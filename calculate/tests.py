@@ -6,21 +6,26 @@ import numpy
 from dataprep.clean import clean_lat_long
 # Create your tests here.
 
-latg =float(input ("\nEnter Degree: "))
-latm =float(input ("\nEnter Degree: "))
-lats =float(input ("\nEnter Degree: "))
+
+X =float(input ("\nEnter Degree: "))
+Y =float(input ("\nEnter Degree: "))
+Z =float(input ("\nEnter Degree: "))
+
+
+latgor =float(input ("\nEnter Degree: "))
+latmor =float(input ("\nEnter Degree: "))
+latsor =float(input ("\nEnter Degree: "))
 #entradas para grados minutos segundos por separado y convertir a grados
-long=float(input ("\nEnter Degree: "))
-lonm=float(input ("\nEnter Degree: "))
-lons=float(input ("\nEnter Degree: "))
-print(long)
-if long<0:
-    lonm=lonm*-1
-    lons=lons*-1
-h=float(input ("\nEnter Degree: "))
-lat=(latg+latm/60+lats/3600)*(math.pi/180)
-lon=(long+lonm/60+lons/3600)*(math.pi/180)
+longor=float(input ("\nEnter Degree: "))
+lonmor=float(input ("\nEnter Degree: "))
+lonsor=float(input ("\nEnter Degree: "))
+hor=float(input ("\nEnter Degree: "))
+
+
+
 elipsoide="WGS84"
+tipo="gms"
+
 
 elipsoides={
 "Hayford":{"a":6378388,"invf":297.0},
@@ -31,7 +36,48 @@ elipsoides={
 
 elipsoide=elipsoides.get(elipsoide)
 
+
+
+
+f=(1/elipsoide["invf"])
+e2=f*(2-f)
+
+
+
+#transformacion=="car2enu":
+
+if tipo=="gms":
+    if longor<0:
+        lonmor=lonmor*-1
+        lonsor=lonsor*-1
+    lator=(latgor+latmor/60+latsor/3600)*(math.pi/180)
+    lonor=(longor+lonmor/60+lonsor/3600)*(math.pi/180)
+if tipo!="gms":
+    lator=lator*(math.pi/180)
+    lonor=lonor*(math.pi/180)  
+#radio de curvatura maximo
+n=elipsoide["a"]/(1-e2*math.sin(lator)**2)**(1/2)
+#coordenadas Cartesianas
+Xo=(n+hor)*math.cos(lator)*math.cos(lonor)
+Yo=(n+hor)*math.cos(lator)*math.sin(lonor)
+Zo=(n*(1-e2)+hor)*math.sin(lator)
+
+IncX=X-Xo
+IncY=Y-Yo
+IncZ=Z-Zo
+
+e=-math.sin(lonor)*IncX+math.cos(lonor)*IncY
+n=-math.sin(lator)*math.cos(lonor)*IncX-math.sin(lator)*math.sin(lonor)*IncY+math.cos(lator)*IncZ
+u=math.cos(lator)*math.cos(lonor)*IncX+math.cos(lator)*math.sin(lonor)*IncY+math.sin(lator)*IncZ
+
 #transformacion=="geo2car":
+'''
+if long<0:
+    lonm=lonm*-1
+    lons=lons*-1
+
+lat=(latg+latm/60+lats/3600)*(math.pi/180)
+lon=(long+lonm/60+lons/3600)*(math.pi/180)
 #lat=clean_lat_long(lat)
 #lon=clean_lat_long(lon)
 print(lat)
@@ -47,7 +93,7 @@ cartZ=(n*(1-e2)+h)*math.sin(lat)
 print(cartX)
 print(cartY)
 print(cartZ)
-
+'''
 #transformacion=="car2geo":
 '''
 cor1=1
